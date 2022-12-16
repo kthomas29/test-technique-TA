@@ -1,15 +1,16 @@
 class GamesController < ApplicationController
+  VOWELS = %w(A E I O U Y)
 
   def new
-    @letters = Array.new(10)
-    @letters.map! { ('A'..'Z').to_a.sample }
+    @letters = Array.new(5) { VOWELS.sample }
+    @letters += Array.new(5) { (("A".."Z").to_a - VOWELS).sample }
+    @letters.shuffle!
   end
 
   def score
-    @word = params[:word]
-    @letters = params[:letters]
-    @included = included?(@word, @letters)
-    @english_word = english_word?(@word)
+    @letters = params[:letters].split
+
+
   end
 
 end
